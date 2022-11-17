@@ -70,18 +70,19 @@ int main(){
         pthread_create(&Thr_A,NULL,countA,NULL);
         paramA.sched_priority = 1;
         retA = pthread_setschedparam(Thr_A,SCHED_OTHER,&paramA);
-        pthread_join(Thr_A,NULL);
+        
 
         struct sched_param paramB;
         pthread_create(&Thr_B,NULL,countB,NULL);
         paramB.sched_priority = 1;
         retB = pthread_setschedparam(Thr_B,SCHED_RR,&paramB);
-        pthread_join(Thr_B,NULL);
-
+        
         struct sched_param paramC;
         pthread_create(&Thr_C,NULL,countC,NULL);
         paramC.sched_priority = 1;
         retC = pthread_setschedparam(Thr_C,SCHED_FIFO,&paramC);
+        pthread_join(Thr_A,NULL);
+        pthread_join(Thr_B,NULL);
         pthread_join(Thr_C,NULL);
     }
     return 0;
